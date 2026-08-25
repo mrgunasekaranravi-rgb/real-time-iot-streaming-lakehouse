@@ -532,6 +532,19 @@ real-time-iot-streaming-lakehouse/
 
 ---
 
+## Requirements
+
+Core project dependencies:
+
+```text
+pyspark
+delta-spark
+```
+
+The project was developed and validated in a Databricks Serverless environment.  
+Actual Spark and Delta versions depend on the Databricks runtime/environment used for execution.
+
+
 ## How to Run
 
 Run the Databricks notebooks sequentially:
