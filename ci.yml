@@ -1,0 +1,49 @@
+name: Python CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate Python Project
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Upgrade pip
+        run: python -m pip install --upgrade pip
+
+      - name: Validate Python syntax
+        run: |
+          python -m py_compile \
+            01_IoT_Source_Generation.py \
+            02_Bronze_Streaming_Ingestion.py \
+            03_Silver_Streaming_Transformation.py \
+            04_Event_Time_Watermarking.py \
+            05_Streaming_Window_Aggregations.py \
+            06_Streaming_Anomaly_Detection.py \
+            07_Gold_Streaming_Metrics.py \
+            08_Streaming_Monitoring_and_Audit.py \
+            09_Streaming_Performance_Optimization.py \
+            10_Pipeline_Orchestration.py \
+            11_Project_Validation.py
+
+      - name: Verify required project files
+        run: |
+          test -f README.md
+          test -f requirements.txt
+          test -f LICENSE
+          test -f architecture.png
