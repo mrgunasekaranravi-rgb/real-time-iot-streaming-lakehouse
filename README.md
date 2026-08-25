@@ -146,8 +146,6 @@ Responsibilities:
 
 Spark Structured Streaming is used to demonstrate incremental processing of IoT events.
 
-The streaming pipeline includes:
-
 ```text
 IoT Events
     |
@@ -179,8 +177,6 @@ Checkpointing is used to maintain streaming processing state.
 The project processes IoT telemetry using event timestamps rather than relying only on processing time.
 
 A watermark is applied to handle late-arriving events while controlling streaming state.
-
-This demonstrates an important production streaming pattern:
 
 ```text
 Event Timestamp
@@ -259,9 +255,9 @@ The project demonstrates Spark optimization concepts including:
 - Selective column processing
 - Aggregation optimization
 - Execution-plan awareness
+- Delta optimization
+- Z-Ordering
 - Serverless-compatible optimization patterns
-
-These techniques represent common approaches used to improve Spark workload performance.
 
 ---
 
@@ -344,8 +340,6 @@ This helps prevent invalid telemetry from silently propagating into analytics la
 
 The final validation notebook performs technical checks across the complete Lakehouse.
 
-Final validation result:
-
 ```text
 REAL-TIME IOT STREAMING LAKEHOUSE
 FINAL PROJECT VALIDATION
@@ -356,10 +350,11 @@ Silver Rows             : 55
 Watermarked Rows        : 55
 Window Metric Rows      : 11
 Anomaly Alert Rows      : 4
+
 Devices Monitored       : 5
 Sites Monitored         : 3
-Architecture Features   : 13
 
+Architecture Features   : 13
 Technical Checks        : 7
 Passed Checks           : 7
 Failed Checks           : 0
@@ -372,103 +367,119 @@ Latest Pipeline Audit   : SUCCESS
 Final Project Status    : VALIDATED
 ```
 
-This confirms successful execution and reconciliation of the implemented pipeline stages.
+---
+
+# Execution Evidence
+
+## 01 - IoT Source Generation
+
+![IoT Source Events](screenshots/01_iot_source_events.png)
+
+![IoT Source Summary](screenshots/02_iot_source_summary.png)
 
 ---
 
-## Execution Evidence
+## 02 - Bronze Streaming Ingestion
 
-### IoT Source Generation
+![Bronze Streaming Source](screenshots/03_bronze_streaming_source.png)
 
-![IoT Source Events](01_iot_source_events.png)
+![Bronze Incremental Streaming](screenshots/04_bronze_incremental_streaming.png)
 
-![IoT Source Summary](02_iot_source_summary.png)
+![Bronze Streaming Summary](screenshots/05_bronze_streaming_summary.png)
 
-### Bronze Streaming Layer
+---
 
-![Bronze Streaming Source](03_bronze_streaming_source.png)
+## 03 - Silver Streaming Transformation
 
-![Bronze Incremental Streaming](04_bronze_incremental_streaming.png)
+![Silver Anomaly Enrichment](screenshots/06_silver_anomaly_enrichment.png)
 
-![Bronze Streaming Summary](05_bronze_streaming_summary.png)
+![Silver Reconciliation](screenshots/07_silver_reconciliation.png)
 
-### Silver Transformation
+![Silver Transformation Summary](screenshots/08_silver_transformation_summary.png)
 
-![Silver Anomaly Enrichment](06_silver_anomaly_enrichment.png)
+---
 
-![Silver Reconciliation](07_silver_reconciliation.png)
+## 04 - Event-Time Watermarking
 
-![Silver Transformation Summary](08_silver_transformation_summary.png)
+![Late Event Classification](screenshots/09_late_event_classification.png)
 
-### Event-Time Processing
+![Watermark Deduplication](screenshots/10_watermark_deduplication.png)
 
-![Late Event Classification](09_late_event_classification.png)
+![Event Time Summary](screenshots/11_event_time_summary.png)
 
-![Watermark Deduplication](10_watermark_deduplication.png)
+---
 
-![Event Time Summary](11_event_time_summary.png)
+## 05 - Streaming Window Aggregations
 
-### Streaming Window Aggregation
+![Streaming Window Metrics](screenshots/12_streaming_window_metrics.png)
 
-![Streaming Window Metrics](12_streaming_window_metrics.png)
+![High Risk Windows](screenshots/13_high_risk_windows.png)
 
-![High Risk Windows](13_high_risk_windows.png)
+![Window Reconciliation](screenshots/14_window_reconciliation.png)
 
-![Window Reconciliation](14_window_reconciliation.png)
+![Streaming Window Summary](screenshots/15_streaming_window_summary.png)
 
-![Streaming Window Summary](15_streaming_window_summary.png)
+---
 
-### Anomaly Detection
+## 06 - Streaming Anomaly Detection
 
-![Anomaly Alert Candidates](16_anomaly_alert_candidates.png)
+![Anomaly Alert Candidates](screenshots/16_anomaly_alert_candidates.png)
 
-![Anomaly Validation](17_anomaly_validation.png)
+![Anomaly Validation](screenshots/17_anomaly_validation.png)
 
-![Anomaly Detection Summary](18_anomaly_detection_summary.png)
+![Anomaly Detection Summary](screenshots/18_anomaly_detection_summary.png)
 
-### Gold Layer
+---
 
-![Gold Top Risk Devices](19_gold_top_risk_devices.png)
+## 07 - Gold Streaming Metrics
 
-![Gold Tables Validation](20_gold_tables_validation.png)
+![Gold Top Risk Devices](screenshots/19_gold_top_risk_devices.png)
 
-![Gold Streaming Summary](21_gold_streaming_summary.png)
+![Gold Tables Validation](screenshots/20_gold_tables_validation.png)
 
-### Monitoring and Audit
+![Gold Streaming Summary](screenshots/21_gold_streaming_summary.png)
 
-![Pipeline Audit History](22_pipeline_audit_history.png)
+---
 
-![Pipeline Health Validation](23_pipeline_health_validation.png)
+## 08 - Streaming Monitoring and Audit
 
-![Monitoring Audit Summary](24_monitoring_audit_summary.png)
+![Pipeline Audit History](screenshots/22_pipeline_audit_history.png)
 
-### Performance Optimization
+![Pipeline Health Validation](screenshots/23_pipeline_health_validation.png)
 
-![Photon Execution Plan](25_photon_execution_plan.png)
+![Monitoring Audit Summary](screenshots/24_monitoring_audit_summary.png)
 
-![Performance Validation](26_performance_validation.png)
+---
 
-![Performance Optimization Summary](27_performance_optimization_summary.png)
+## 09 - Streaming Performance Optimization
 
-### Pipeline Orchestration
+![Photon Execution Plan](screenshots/25_photon_execution_plan.png)
 
-![Pipeline Stages](28_pipeline_stages.png)
+![Performance Validation](screenshots/26_performance_validation.png)
 
-![Orchestration Validation](29_orchestration_validation.png)
+![Performance Optimization Summary](screenshots/27_performance_optimization_summary.png)
 
-![Pipeline Orchestration Summary](30_pipeline_orchestration_summary.png)
+---
 
-### Final Validation
+## 10 - Pipeline Orchestration
 
-![Architecture Features](31_architecture_features.png)
+![Pipeline Stages](screenshots/28_pipeline_stages.png)
 
-![Project Validation](32_project_validation_100_percent.png)
+![Orchestration Validation](screenshots/29_orchestration_validation.png)
+
+![Pipeline Orchestration Summary](screenshots/30_pipeline_orchestration_summary.png)
+
+---
+
+## 11 - Final Project Validation
+
+![Architecture Features](screenshots/31_architecture_features.png)
+
+![Project Validation 100 Percent](screenshots/32_project_validation_100_percent.png)
 
 ---
 
 ## Key Engineering Concepts Demonstrated
-
-This project demonstrates practical implementation of:
 
 1. Lakehouse Architecture
 2. Medallion Architecture
@@ -505,11 +516,14 @@ real-time-iot-streaming-lakehouse/
 ├── 10_Pipeline_Orchestration.py
 ├── 11_Project_Validation.py
 │
-├── 01_iot_source_events.png
-├── 02_iot_source_summary.png
-├── ...
-├── 31_architecture_features.png
-├── 32_project_validation_100_percent.png
+├── screenshots/
+│   ├── 01_iot_source_events.png
+│   ├── 02_iot_source_summary.png
+│   ├── 03_bronze_streaming_source.png
+│   ├── ...
+│   ├── 30_pipeline_orchestration_summary.png
+│   ├── 31_architecture_features.png
+│   └── 32_project_validation_100_percent.png
 │
 └── README.md
 ```
@@ -518,7 +532,7 @@ real-time-iot-streaming-lakehouse/
 
 ## How to Run
 
-Run the notebooks sequentially in the following order:
+Run the Databricks notebooks sequentially:
 
 ```text
 01_IoT_Source_Generation
@@ -534,7 +548,7 @@ Run the notebooks sequentially in the following order:
 11_Project_Validation
 ```
 
-After execution, the final validation notebook should be used to verify the pipeline status and reconciliation results.
+After execution, use `11_Project_Validation` to verify the final pipeline status and reconciliation results.
 
 ---
 
