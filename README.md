@@ -35,6 +35,8 @@ The pipeline demonstrates practical data engineering concepts including:
 
 ## Architecture
 
+![Real-Time IoT Streaming Lakehouse Architecture](architecture.png)
+
 ```text
                 IoT Devices / Sensors
                          |
