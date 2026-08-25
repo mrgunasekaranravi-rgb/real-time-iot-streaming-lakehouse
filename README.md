@@ -5,6 +5,7 @@
 ![Delta Lake](https://img.shields.io/badge/Delta%20Lake-Medallion%20Architecture-blue)
 ![PySpark](https://img.shields.io/badge/PySpark-Data%20Engineering-yellow)
 ![Status](https://img.shields.io/badge/Project-Validated-success)
+![Python CI](https://github.com/mrgunasekaranravi-rgb/real-time-iot-streaming-lakehouse/actions/workflows/ci.yml/badge.svg)
 
 ## Overview
 
